@@ -14,6 +14,17 @@ import { AllCurrencyRatesComponent } from "./all-currency-rates/all-currency-rat
 import { SearchHistoryComponent } from "./search-history/search-history.component";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../environments/environment";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+
 
 @NgModule({
   declarations: [
@@ -21,6 +32,7 @@ import { environment } from "../environments/environment";
     ConvertComponent,
     AllCurrencyRatesComponent,
     SearchHistoryComponent,
+    NavBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,6 +44,13 @@ import { environment } from "../environments/environment";
       maxAge: 25,
       logOnly: environment.production,
     }),
+    BrowserAnimationsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

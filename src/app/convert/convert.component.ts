@@ -22,9 +22,8 @@ export class ConvertComponent implements OnInit {
   toCurrencyCode: string;
   optionalDate: Date;
   exchangeDate: string;
+  loadingMsg: string;
   errorMsg: string;
-
-  validDate = /^\d\d\d\d-\d\d-\d\d$/;
 
   constructor(
     private ratesService: RatesService,
@@ -32,10 +31,12 @@ export class ConvertComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.currencyCodes = [];
+    this.loadingMsg = "loading currency codes";
     this.ratesService.getRates("latest").subscribe((response: any) => {
+      this.loadingMsg = "";
       if (response && response.success) {
         const rates = response.rates;
+        this.currencyCodes = [];
         for (let key in rates) {
           this.currencyCodes.push(key);
         }

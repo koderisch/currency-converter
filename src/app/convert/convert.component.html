@@ -1,14 +1,19 @@
 <h2>Convert</h2>
 
-<form (input)="clearResult()" (ngSubmit)="convert()" ngNativeValidate>
+<form
+  *ngIf="currencyCodes"
+  (input)="clearResult()"
+  (ngSubmit)="convert()"
+  ngNativeValidate
+>
   <p>
+    Amount:
     <input
       type="number"
       step="0.01"
       required
       name="from-amount"
       [(ngModel)]="fromAmount"
-      placeholder="FROM: amount"
     />*
   </p>
   <p>
@@ -28,30 +33,30 @@
   </p>
 
   <p>
-    <input
-      type="text"
-      name="optional-date"
-      [(ngModel)]="optionalDate"
-      placeholder="Date [YYYY-MM-DD]"
-      [pattern]="validDate"
-    />
+    Optional date (YYYY-MM-DD):
+    <input type="text" name="optional-date" [(ngModel)]="optionalDate" />
   </p>
 
   <p>* = required</p>
 
-  <div *ngIf="errorMsg" class="errorMsg">{{ errorMsg }}</div>
 
   <button type="submit">Convert</button>
-
-  <div *ngIf="toAmount">
-    <p>
-      <span *ngIf="!optionalDate">Today's </span>
-      <span>
-        {{ toCurrencyCode }} rate for {{ fromAmount.toFixed(2) }}
-        {{ fromCurrencyCode }}
-      </span>
-      <span *ngIf="optionalDate"> on {{ this.exchangeDate }}</span>
-    </p>
-    <p>= {{ toAmount.toFixed(2) }} {{ toCurrencyCode }} ({{ toAmount }})</p>
-  </div>
 </form>
+
+<div *ngIf="errorMsg" class="errorMsg">{{ errorMsg }}</div>
+<div *ngIf="loadingMsg" class="loadingMsg">{{ loadingMsg }}</div>
+
+<div *ngIf="toAmount" class="results">
+  <h3>
+    <span>Exchange rate </span>
+    <em>{{ fromCurrencyCode }} </em>
+    <span>to </span>
+    <em>{{ toCurrencyCode }} </em>
+    <span *ngIf="!optionalDate">(today)</span>
+    <span *ngIf="optionalDate">(on {{ this.exchangeDate }})</span>
+  </h3>
+  <p>
+    {{ fromAmount.toFixed(2) }} {{ fromCurrencyCode }} =
+    {{ toAmount.toFixed(8) }} {{ toCurrencyCode }}
+  </p>
+</div>

@@ -1,5 +1,30 @@
-.errorMsg {
-  background: #ff9999;
+.errorMsg,
+.loadingMsg {
   margin: 20px 0;
   padding: 6px;
+}
+.errorMsg {
+  background: #ff9999;
+}
+.loadingMsg {
+  background: #99ff99;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+main {
+  padding: 20px;
+}
+
+.results {
+  padding: 15px;
+  background: #aaeeff;
+  margin: 20px 0 20px 0;
 }

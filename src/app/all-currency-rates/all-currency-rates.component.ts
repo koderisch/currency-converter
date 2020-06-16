@@ -8,16 +8,32 @@ import { RatesService } from "../shared/rates.service";
   styleUrls: ["./all-currency-rates.component.css"],
 })
 export class AllCurrencyRatesComponent implements OnInit {
+  currencyCodes: Array<string>;
   fromCurrencyCode: string;
   fromAmount: number = 1;
   optionalDate: string;
   exchangeDate: string;
   allRates: Array<any>;
+  loadingMsg: string;
   errorMsg: string;
 
   constructor(private ratesService: RatesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadingMsg = "loading currency codes";
+    this.ratesService.getRates("latest").subscribe((response: any) => {
+      this.loadingMsg = "";
+      if (response && response.success) {
+        const rates = response.rates;
+        this.currencyCodes = [];
+        for (let key in rates) {
+          this.currencyCodes.push(key);
+        }
+      } else {
+        if (response.error) this.errorMsg = "Failed to load currency codes";
+      }
+    });
+  }
 
   getRates() {
     this.errorMsg = "";

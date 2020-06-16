@@ -1,66 +1,57 @@
 <h2>All currency rates</h2>
 
-<form (input)="clearResult()" (ngSubmit)="getRates()" ngNativeValidate>
+<form
+  *ngIf="currencyCodes"
+  (input)="clearResult()"
+  (ngSubmit)="getRates()"
+  ngNativeValidate
+>
   <p>
-    <input
-      (input)="fromCurrencyCode = fromCurrencyCode.toUpperCase()"
-      (keydown)="clearResult()"
-      type="text"
-      required
-      name="from-currency-code"
-      [(ngModel)]="fromCurrencyCode"
-      placeholder="FROM: currency code"
-    />
+    Currency:
+    <select name="from-currency-code" [(ngModel)]="fromCurrencyCode" required>
+      <option selected></option>
+      <option *ngFor="let code of currencyCodes">{{ code }}</option></select
+    >*
   </p>
 
   <p>
+    Amount:
     <input
-      (keydown)="clearResult()"
       type="number"
       step="0.01"
       required
       name="from-amount"
       [(ngModel)]="fromAmount"
-      placeholder="FROM: amount"
     />
   </p>
 
   <p>
-    <input
-      (keydown)="clearResult()"
-      type="text"
-      name="optional-date"
-      [(ngModel)]="optionalDate"
-      placeholder="Date (optional)"
-    />
+    Optional date (YYYY-MM-DD):
+    <input type="text" name="optional-date" [(ngModel)]="optionalDate" />
   </p>
 
-  <div *ngIf="errorMsg" class="errorMsg">{{ errorMsg }}</div>
+  <p>* = required</p>
 
   <button type="submit">Display currency rates</button>
-
-  <div *ngIf="allRates">
-    <!--<ul>
-      <li *ngFor="let rate of allRates">
-        {{fromAmount}} {{fromCurrencyCode}} = {{ rate.amount.toFixed(2) }} {{rate.currencyCode}} (1 {{fromCurrencyCode}} = {{ (rate.amount/fromAmount) }} {{rate.currencyCode}})
-      </li>
-    </ul>-->
-    <p>
-      <span *ngIf="optionalDate"
-        >Currency rates on {{ this.exchangeDate }}</span
-      >
-      <span *ngIf="!optionalDate">Today's currency rates</span>
-      <span> for {{ fromAmount }} {{ fromCurrencyCode }}</span>
-    </p>
-    <table>
-      <tr *ngFor="let rate of allRates">
-        <td style="text-align: right;">{{ rate.amount.toFixed(2) }}</td>
-        <td>{{ rate.currencyCode }}</td>
-        <td>
-          (1 {{ fromCurrencyCode }} = {{ rate.amount / fromAmount }}
-          {{ rate.currencyCode }})
-        </td>
-      </tr>
-    </table>
-  </div>
 </form>
+
+<div *ngIf="errorMsg" class="errorMsg">{{ errorMsg }}</div>
+<div *ngIf="loadingMsg" class="loadingMsg">{{ loadingMsg }}</div>
+
+<div *ngIf="allRates" class="results">
+  <p>
+    <span *ngIf="optionalDate">Currency rates on {{ this.exchangeDate }}</span>
+    <span *ngIf="!optionalDate">Today's currency rates</span>
+    <span> for {{ fromAmount }} {{ fromCurrencyCode }}</span>
+  </p>
+  <table>
+    <tr *ngFor="let rate of allRates">
+      <td style="text-align: right;">{{ rate.amount.toFixed(2) }}</td>
+      <td>{{ rate.currencyCode }}</td>
+      <td>
+        (1 {{ fromCurrencyCode }} = {{ rate.amount / fromAmount }}
+        {{ rate.currencyCode }})
+      </td>
+    </tr>
+  </table>
+</div>

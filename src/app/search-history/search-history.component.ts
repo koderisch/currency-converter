@@ -21,8 +21,16 @@ export class SearchHistoryComponent implements OnInit {
   }
 
   formatDate(date) {
-    let dateString = `${date.getFullYear()}-${date.getMonth().toString().padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
-    dateString += ` / ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+    let dateString = `${date.getFullYear()}`;
+    dateString += `-${this.twoDigits(date.getMonth())}`;
+    dateString += `-${this.twoDigits(date.getDate())}`;
+    dateString += ` / ${this.twoDigits(date.getHours())}`;
+    dateString += `:${this.twoDigits(date.getMinutes())}`;
+    dateString += `:${this.twoDigits(date.getSeconds())}`;
     return dateString;
+  }
+
+  twoDigits(no) {
+    return no.toString().padStart(2, "0");
   }
 }
