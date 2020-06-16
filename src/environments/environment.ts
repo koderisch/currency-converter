@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  FIXER_ACCESS_KEY: "",
+  FIXER_ACCESS_KEY: "", // add fixer.io API Access Key before compiling
 };
 
 /*
