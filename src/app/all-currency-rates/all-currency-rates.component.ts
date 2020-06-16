@@ -39,7 +39,6 @@ export class AllCurrencyRatesComponent implements OnInit {
     this.errorMsg = "";
     const date = this.optionalDate ? this.optionalDate : "latest";
     this.ratesService.getRates(date).subscribe((response: any) => {
-      //console.log(response);
       if (response && response.success) {
         const rates = response.rates;
         this.exchangeDate = response.date;
@@ -55,7 +54,6 @@ export class AllCurrencyRatesComponent implements OnInit {
       this.errorMsg = `FROM: currency code '${this.fromCurrencyCode}' did not match available currency codes`;
       return;
     }
-    //console.log(rates);
     this.allRates = [];
     for (let key in rates) {
       const amountInEUR = this.fromAmount / rates[this.fromCurrencyCode];
@@ -66,7 +64,6 @@ export class AllCurrencyRatesComponent implements OnInit {
         amount: amount,
       };
       this.allRates.push(rate);
-      //console.log(rates[i]);
     }
   }
   clearResult() {

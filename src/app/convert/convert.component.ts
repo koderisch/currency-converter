@@ -50,7 +50,6 @@ export class ConvertComponent implements OnInit {
     this.errorMsg = "";
     const date = this.optionalDate ? this.optionalDate : "latest";
     this.ratesService.getRates(date).subscribe((response: any) => {
-      //console.log(response);
       if (response && response.success) {
         const rates = response.rates;
         this.exchangeDate = response.date;
