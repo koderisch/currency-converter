@@ -24,6 +24,8 @@ export class ConvertComponent implements OnInit {
   exchangeDate: string;
   errorMsg: string;
 
+  validDate = /^\d\d\d\d-\d\d-\d\d$/;
+
   constructor(
     private ratesService: RatesService,
     private store: Store<AppState>
