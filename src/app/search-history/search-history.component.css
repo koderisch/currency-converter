@@ -1,0 +1,15 @@
+table.search-history {
+    border-collapse: collapse;
+}
+table.search-history td {
+  border: 1px solid #000;
+}
+
+table.search-history thead td {
+    font-weight: bold;
+}
+
+table.search-history td {
+    padding: 5px 10px;
+    margin: 0;
+}

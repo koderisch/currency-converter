@@ -1,1 +1,5 @@
-/* You can add global styles to this file, and also import other style files */
+.errorMsg {
+  background: #ff9999;
+  margin: 20px 0;
+  padding: 6px;
+}

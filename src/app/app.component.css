@@ -1,0 +1,19 @@
+ul#nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  background: #ccc;
+}
+ul#nav li {
+  padding: 0;
+  margin: 0;
+}
+ul#nav li a {
+  padding: 5px 10px;
+  display: block;
+}
+ul#nav li a:hover {
+  background: #eee;
+}
+

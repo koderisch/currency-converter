@@ -1,0 +1,21 @@
+<h2>Search History</h2>
+
+<table *ngIf="historyItems$ | async as historyItems" class="search-history">
+  <thead>
+    <td>Query time</td>
+    <td>Amount</td>
+    <td>FROM currency</td>
+    <td>converted amount</td>
+    <td>TO currency</td>
+    <td>Exchange date</td>
+  </thead>
+
+  <tr *ngFor="let historyItem of historyItems">
+    <td>{{ formatDate(historyItem.queryTime) }}</td>
+    <td>{{ historyItem.fromAmount.toFixed(2) }}</td>
+    <td>{{ historyItem.fromCurrencyCode }}</td>
+    <td>{{ historyItem.toAmount.toFixed(2) }}</td>
+    <td>{{ historyItem.toCurrencyCode }}</td>
+    <td>{{ historyItem.exchangeDate }}</td>
+  </tr>
+</table>
